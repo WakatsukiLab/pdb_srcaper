@@ -32,7 +32,7 @@ def main():
     json_text = '{"query":{"parameters":{"value":"plpro"},"service":"text","type":"terminal","node_id":0},"return_type":"entry","request_options":{"pager":{"start":0,"rows":100},"scoring_strategy":"combined","sort":[{"sort_by":"rcsb_accession_info.initial_release_date","direction":"desc"}]}}'
     params = json.loads(json_text)
     params["query"]["parameters"]["value"] = args.keyword
-    # print(json.dumps(params))
+    params["request_options"]["pager"]["rows"] = args.n_results
     url = "https://search.rcsb.org/rcsbsearch/v1/query?json=" + quote(json.dumps(params))
     print("Fetching {}".format(url))
     html = scrape(url)
